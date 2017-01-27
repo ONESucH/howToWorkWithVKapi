@@ -40,7 +40,20 @@ function createUserToken(dataID) {
     var idUser = dataID,
         mainBlockFullInformation = document.createElement('div'),
         informationUser = document.createElement('div'),
-        userNameAndFamily = 'https://api.vk.com/method/users.get?user_id='+idUser+'&v=5.52';
+        userNameAndFamily = 'https://api.vk.com/method/users.get?user_id=' + idUser + '&v=5.52',
+        modelUser = {
+            title: 'Титул',
+            name: 'Ваня',
+            family: 'Ларин'
+        },
+        //jsonString = JSON.stringify(modelUser),
+        //jsonUserInformationObject = JSON.parse(jsonString),
+        jsonUrl = JSON.stringify(userNameAndFamily),
+        url = JSON.parse(jsonUrl.response[id]);
+
+    console.log(url);
+    //console.log(jsonUserInformationObject);
+    //alert(jsonUserInformationObject.title);
 
     mainBlockFullInformation.className = 'information-block';
 
