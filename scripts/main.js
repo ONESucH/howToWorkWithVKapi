@@ -1,6 +1,4 @@
-//85927952 user
-//5660660 program
-//accessToken = 'f9df78113bb1da2fe574a1850617422584d9bf20278fc75c68199a331b2a7e5b8b3ebb482a6bfe138fd31';
+//31231
 
 var createBlockInContainer = document.createElement('div'),
     mainBlockFullInformation = document.createElement('div'),
@@ -28,8 +26,8 @@ createButtonInBlock.addEventListener('click', function () {
             createInputInBlock.value = ''
         }, 2000);
         return false;
-    } else if (dataID.length !== 7 && dataID.length !== 8) {
-        createInputInBlock.value = 'ID состоит из 7-8 цифр';
+    } else if (dataID.length > 10) {
+        createInputInBlock.value = 'ID состоит из 0-10 цифр';
         setTimeout(function () {
             createInputInBlock.value = ''
         }, 2000);
@@ -42,7 +40,7 @@ createButtonInBlock.addEventListener('click', function () {
 
 function createUserToken(dataID) {
     var idUser = dataID,
-        userNameAndFamily = 'https://api.vk.com/method/users.get?user_id=' + idUser + '&v=5.52';
+        userNameAndFamily = 'https://api.vk.com/method/users.get?user_ids=' + idUser + '&fields=bdate&v=5.62';
 
     $.ajax({
         url: userNameAndFamily,
@@ -53,8 +51,9 @@ function createUserToken(dataID) {
         },
         success: function (answer) {
             tableUl.innerHTML = '<li>' + 'Id : ' + '<span>' + answer.response[0].id + '</span>' + '</li>' +
+                '<li>' + 'Дата регистрации : ' + '<span>' + answer.response[0].bdate + '</span>' + '</li>' +
                 '<li>' + 'Статус : ' + '<span>' + answer.response[0].deactivated + '</span>' + '</li>' +
-                '<li>' + 'Id : ' + '<span>' + answer.response[0].id + '</span>' + '</li>';
+                '<li>' + 'Скрытность : ' + '<span>' + answer.response[0].hidden + '</span>' + '</li>';
             createTitleInBlockTwo.innerHTML = answer.response[0].last_name + '  ' + answer.response[0].first_name;
             console.log('Данные получены: ');
         },
