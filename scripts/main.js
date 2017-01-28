@@ -3,8 +3,12 @@
 //accessToken = 'f9df78113bb1da2fe574a1850617422584d9bf20278fc75c68199a331b2a7e5b8b3ebb482a6bfe138fd31';
 
 var createBlockInContainer = document.createElement('div'),
+    mainBlockFullInformation = document.createElement('div'),
+    informationUser = document.createElement('div'),
+    tableUl = document.createElement('ul'),
     createInputInBlock = document.createElement('input'),
     createTitleInBlock = document.createElement('h1'),
+    createTitleInBlockTwo = document.createElement('h2'),
     createButtonInBlock = document.createElement('button');
 
 createBlockInContainer.className = 'main-block';
@@ -38,29 +42,33 @@ createButtonInBlock.addEventListener('click', function () {
 
 function createUserToken(dataID) {
     var idUser = dataID,
-        mainBlockFullInformation = document.createElement('div'),
-        informationUser = document.createElement('div'),
-        userNameAndFamily = 'https://api.vk.com/method/users.get?user_id=' + idUser + '&v=5.52',
-        modelUser = {
-            title: 'Титул',
-            name: 'Ваня',
-            family: 'Ларин'
-        },
-        //jsonString = JSON.stringify(modelUser),
-        //jsonUserInformationObject = JSON.parse(jsonString),
-        jsonUrl = JSON.stringify(userNameAndFamily),
-        url = JSON.parse(jsonUrl.response[id]);
+        userNameAndFamily = 'https://api.vk.com/method/users.get?user_id=' + idUser + '&v=5.52';
 
-    console.log(url);
-    //console.log(jsonUserInformationObject);
-    //alert(jsonUserInformationObject.title);
+    $.ajax({
+        url: userNameAndFamily,
+        type: 'GET',
+        dataType: 'JSONP',
+        beforeSend: function () {
+            console.log('Отправление данных...');
+        },
+        success: function (answer) {
+            tableUl.innerHTML = '<li>' + 'Id : ' + '<span>' + answer.response[0].id + '</span>' + '</li>' +
+                '<li>' + 'Статус : ' + '<span>' + answer.response[0].deactivated + '</span>' + '</li>' +
+                '<li>' + 'Id : ' + '<span>' + answer.response[0].id + '</span>' + '</li>';
+            createTitleInBlockTwo.innerHTML = answer.response[0].last_name + '  ' + answer.response[0].first_name;
+            console.log('Данные получены: ');
+        },
+        error: function (answer) {
+            console.log('Ошибка при получении данных: ', answer);
+        }
+    });
 
     mainBlockFullInformation.className = 'information-block';
+    informationUser.className = 'imageUser';
 
-
+    informationUser.append(createTitleInBlockTwo);
+    mainBlockFullInformation.append(informationUser, tableUl);
     $('.container').append(mainBlockFullInformation);
-    mainBlockFullInformation.append(informationUser);
 
     console.log(userNameAndFamily);
-    console.log(idUser, '<--');
 }

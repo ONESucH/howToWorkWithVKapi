@@ -40,5 +40,31 @@
   position: relative;
   text-align: center;
   margin: auto;
-  padding: 5vh;
+  padding: 5vh 0;
+  color: rgba(255, 200, 108, 0.76);
+}
+.information-block ul {
+  display: inline-block;
+  vertical-align: middle;
+  list-style: none;
+  margin: auto;
+}
+.information-block li {
+  display: block;
+  text-align: left;
+  padding: 10px;
+}
+.information-block span {
+  padding: 0 10px;
+  float: right;
+  text-align: right;
+}
+.imageUser {
+  display: inline-block;
+  vertical-align: middle;
+  margin: auto;
+}
+.imageUser h2 {
+  text-align: center;
+  padding: 10px;
 }
