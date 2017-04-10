@@ -1,7 +1,4 @@
 //85927952 user
-//5660660 program
-//accessToken = 'f9df78113bb1da2fe574a1850617422584d9bf20278fc75c68199a331b2a7e5b8b3ebb482a6bfe138fd31';
-
 var createBlockInContainer = document.createElement('div'),
     createInputInBlock = document.createElement('input'),
     createTitleInBlock = document.createElement('h1'),
